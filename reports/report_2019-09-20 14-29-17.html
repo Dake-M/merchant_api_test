@@ -1,0 +1,2489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>云缴费运营商接口测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 120%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">云缴费运营商接口测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> Dake</p>
+<p class='attribute'><strong>开始时间 : </strong> 2019-09-20 14:29:19</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:02:18.463845</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 429，通过 424，失败 5，通过率= 98.83%</p>
+
+<p class='description'>云缴费运营商各个模块包含的接口测试</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 98.83% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 5 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 424 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 429 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 16px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_01_group_login.Testcase</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',6)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_1_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_2_登录密码为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_3_登录帐号为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_4_登录账号密码为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_5_登录账号错误</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt1_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_6_登录密码错误</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_02_group_home_page.Testcase</td>
+    <td class="text-center">19</td>
+    <td class="text-center">19</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',19)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_获取当前登录管理员</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_获取集团及设置信息</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_今日缴费统计</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_首页统计信息列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_首页统计信息列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_首页统计信息列表page为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_首页统计信息列表count为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_首页统计信息详情</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_分组总览列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_分组总览列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_分组总览列表page为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_分组总览列表count为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_分组今日缴费统计</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_分组今日缴费统计分组不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_分组今日缴费统计不传参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_分组统计信息列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_分组统计信息列表分组不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt2_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_分组统计信息列表不传参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_03_student_list.Testcase</td>
+    <td class="text-center">32</td>
+    <td class="text-center">32</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',32)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_学校列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_学校列表条件page为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_学校列表条件count为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_学校列表条件schoolName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_学校列表条件schoolName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_学校列表条件schoolGroupName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_学校列表条件schoolGroupName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_学校列表_条件不为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_年级列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_年级列表schoolId为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_子商户下学生列表isEnroll为1</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_子商户下学生列表isEnroll为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_拉取学校id_schoolGroupName和schoolName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_拉取学校id_schoolGroupName和schoolName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_拉取学校id_schoolGroupName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_拉取学校id_schoolGroupName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_拉取学校id_schoolName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_拉取学校id_schoolName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_20_拉取学校id传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_21_筛选运营商下的所有学生_已录取_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_22_筛选运营商下的所有学生_未录取_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_23_筛选运营商下的所有学生_已录取_其他为null_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_24_筛选运营商下的所有学生_已录取_page为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_25_筛选运营商下的所有学生_已录取_count为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_26_筛选运营商下的所有学生_已录取_schoolName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_27_筛选运营商下的所有学生_已录取_schoolName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_28_筛选运营商下的所有学生_已录取_schoolGroupName为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_29_筛选运营商下的所有学生_已录取_schoolGroupName为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_30_筛选运营商下的所有学生_已录取_page格式为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_31_筛选运营商下的所有学生_已录取_count格式为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_32_筛选运营商下的所有学生传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_04_tag_list.Testcase</td>
+    <td class="text-center">46</td>
+    <td class="text-center">44</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',46)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_标签列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_标签列表不传page</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_标签列表不传count</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_标签列表不传参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_标签列表page为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_标签列表page数据格式为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_标签列表page为负数</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_标签列表count为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_标签列表count数据格式为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_标签列表count为负数</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_正常创建标签</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_创建标签_标签名重复</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_删除标签</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_删除不存在的标签</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_创建标签标不传标签名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_创建标签标签名为数字</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_创建标签标签名长度为9</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_创建标签标签名长度为10</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_20_创建标签标签名长度为11</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_21_编辑标签</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_22_编辑标签重名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_23_编辑标签不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_24_编辑标签id为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_25_编辑标签name为number</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_26_标签下的学生列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_27_标签下的学生列表isEnrol为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_28_标签下的学生列表page为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_29_标签下的学生列表page为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_30_标签下的学生列表count为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_31_标签下的学生列表count为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_32_标签下的学生列表tagId为0</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_33_标签下的学生列表tagId为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_34_标签下的学生列表isEnrol为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_35_标签下的学生列表isEnrol为6</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_36_标签下导入学生</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft4_37' class='none'>
+    <td class='failCase'><div class='testcase'>test_case_37_标签下导入学生_学生信息为空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_37' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_37'>失败</button>
+    <div id='div_ft4_37' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_37' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_37'>失败</button>
+    <div id='div_ft4_37' class="collapse in" align="left">
+    <pre>
+    
+ft4_37: Traceback (most recent call last):
+  File "d:\Group_Api_payment\lib\ddt.py", line 150, in wrapper
+    return func(self, *args, **kwargs)
+  File "d:\Group_Api_payment\test_cases_py\test_04_tag_list.py", line 103, in test_case
+    raise e
+  File "d:\Group_Api_payment\test_cases_py\test_04_tag_list.py", line 82, in test_case
+    self.assertIn(str(data_dict["expected"]), res.text)
+AssertionError: 'ok' not found in '{"errcode":"104101008","errmsg":"正在处理中,请勿频繁操作"}'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft4_38' class='none'>
+    <td class='failCase'><div class='testcase'>test_case_38_标签下导入学生_标签不存在</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_38' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_38'>失败</button>
+    <div id='div_ft4_38' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_38' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_38'>失败</button>
+    <div id='div_ft4_38' class="collapse in" align="left">
+    <pre>
+    
+ft4_38: Traceback (most recent call last):
+  File "d:\Group_Api_payment\lib\ddt.py", line 150, in wrapper
+    return func(self, *args, **kwargs)
+  File "d:\Group_Api_payment\test_cases_py\test_04_tag_list.py", line 103, in test_case
+    raise e
+  File "d:\Group_Api_payment\test_cases_py\test_04_tag_list.py", line 82, in test_case
+    self.assertIn(str(data_dict["expected"]), res.text)
+AssertionError: 'ok' not found in '{"errcode":"104101008","errmsg":"正在处理中,请勿频繁操作"}'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt4_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_39_移除标签下的学生</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_40' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_40_移除标签下的学生studentId不在标签下</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_41_移除标签下的学生studentId列表为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_42' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_42_移除标签下的学生tagId不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_43' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_43_移除标签下的学生tagId为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_44' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_44_移除标签下的学生不传tagId</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_45' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_45_移除标签下的学生不传studentId</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_46' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_46_移除标签下的学生传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_05_school_management.Testcase</td>
+    <td class="text-center">60</td>
+    <td class="text-center">60</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',60)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='pt5_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_学校列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_学校列表不传page</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_学校列表不传count</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_学校列表不传schoolName</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_学校列表page传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_学校列表count传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_学校列表page传str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_学校列表count传str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_学校列表schoolName传number</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_学校列表根据schoolName搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_获取学校及开户信息</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_省列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_学校详情</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_市列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_学校信息修改</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_学校信息修改只传id</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_学校信息修改province和city不对应</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_学校信息修改mobile为number</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_20_学校信息修改mobile格式不正确</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_21_学校信息修改schoolLevel错误</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_22_学校信息修改netType不为school</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_23_重置密码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_24_重置密码mobile为number</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_25_重置密码mobile不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_26_越权登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_27_越权登录schoolId不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_28_越权登录schoolId为str</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_29_分组列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_30_分组列表根据分组名搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_31_分组列表name不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_32_分组列表name为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_33_分组列表page不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_34_分组列表page为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_35_分组列表count不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_36_分组列表count为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_37_修改分组</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_38' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_38_修改分组id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_39_修改分组不传code</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_40' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_40_修改分组不传name</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_41_修改分组不传参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_42' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_42_添加分组</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_43' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_43_添加分组name重名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_44' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_44_添加分组不传name</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_45' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_45_添加分组name为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_46' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_46_添加分组code重名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_47' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_47_添加分组不传code</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_48' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_48_添加分组code为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_49' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_49_添加分组code为number</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_50' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_50_删除分组</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_51' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_51_删除分组id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_52' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_52_分组下学校列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_53' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_53_分组下学校列表分组不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_54' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_54_管理分组_添加学校到分组</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_55' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_55_管理分组_添加学校到分组_学校id为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_56' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_56_管理分组_添加学校到分组_分组id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_57' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_57_批量导入分组学校</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_58' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_58_批量导入分组学校_学校列表为空_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_59' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_59_批量导入分组学校_学校列表有数字</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_60' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_60_批量导入分组学校_分组id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_06_report_center.Testcase</td>
+    <td class="text-center">146</td>
+    <td class="text-center">146</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',146)" class="detail" id='c6'>详细</a></td>
+</tr>
+
+<tr id='pt6_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_001_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_002_学校统计表汇总</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_003_学校统计表汇总不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_004_学校统计表汇总不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_005_学校统计表汇总不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_006_学校统计表汇总不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_007_学校统计表汇总不传学校名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_008_学校统计表汇总传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_009_学校统计表汇总开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_010_学校统计表汇总开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_011_学校统计表汇总分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_012_学校统计表汇总分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_013_学校统计表汇总学校名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_014_学校统计表汇总学校名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_015_学校统计表汇总不传学校名和分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_016_报表最后更新时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_017_学校统计表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_018_学校统计表不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_019_学校统计表不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_020_学校统计表不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_021_学校统计表不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_022_学校统计表不传学校名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_023_学校统计表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_024_学校统计表开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_025_学校统计表开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_026_学校统计表分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_027_学校统计表分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_028_学校统计表学校名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_029_学校统计表学校名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_030_学校统计表不传学校名和分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_031_学校统计表按天</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_032_学校统计表按天不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_033_学校统计表按天不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_034_学校统计表按天不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_035_学校统计表按天不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_036_学校统计表按天不传学校名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_037_学校统计表按天传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_38' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_038_学校统计表按天开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_039_学校统计表按天开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_40' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_040_学校统计表按天分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_041_学校统计表按天分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_42' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_042_学校统计表按天学校名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_43' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_043_学校统计表按天学校名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_44' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_044_学校统计表按天不传学校名和分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_45' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_045_学校分组统计表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_46' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_046_学校分组统计表不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_47' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_047_学校分组统计表不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_48' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_048_学校分组统计表不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_49' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_049_学校分组统计表不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_50' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_050_学校分组统计表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_51' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_051_学校分组统计表开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_52' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_052_学校分组统计表开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_53' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_053_学校分组统计表分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_54' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_054_学校分组统计表分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_55' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_055_学校分组统计表不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_56' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_056_学校分组统计表汇总</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_57' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_057_学校分组统计表汇总不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_58' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_058_学校分组统计表汇总不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_59' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_059_学校分组统计表汇总不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_60' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_060_学校分组统计表汇总不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_61' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_061_学校分组统计表汇总传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_62' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_062_学校分组统计表汇总开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_63' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_063_学校分组统计表汇总开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_64' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_064_学校分组统计表汇总分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_65' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_065_学校分组统计表汇总分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_66' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_066_学校分组统计表按天</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_67' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_067_学校分组统计表按天不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_68' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_068_学校分组统计表按天不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_69' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_069_学校分组统计表按天不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_70' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_070_学校分组统计表按天不传分组名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_71' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_071_学校分组统计表按天传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_72' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_072_学校分组统计表按天开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_73' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_073_学校分组统计表按天开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_74' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_074_学校分组统计表按天分组名不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_75' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_075_学校分组统计表按天分组名传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_76' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_076_项目列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_77' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_077_项目列表不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_78' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_078_项目列表不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_79' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_079_项目列表不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_80' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_080_项目列表不传项目id</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_81' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_081_项目列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_82' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_082_项目列表开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_83' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_083_项目列表开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_84' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_084_项目列表项目id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_85' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_085_项目列表项目id传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_86' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_086_项目列表汇总</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_87' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_087_项目列表汇总不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_88' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_088_项目列表汇总不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_89' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_089_项目列表汇总不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_90' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_090_项目列表不传项目id</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_91' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_091_项目列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_92' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_092_项目列表汇总开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_93' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_093_项目列表汇总开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_94' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_094_项目列表汇总项目id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_95' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_095_项目列表汇总项目id传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_96' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_096_平台列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_97' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_097_平台列表不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_98' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_098_平台列表不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_99' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_099_平台列表不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_100' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_100_平台列表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_101' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_101_平台列表开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_102' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_102_平台列表开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_103' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_103_平台列表汇总</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_104' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_104_平台列表汇总不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_105' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_105_平台列表汇总不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_106' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_106_平台列表汇总传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_107' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_107_平台列表汇总开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_108' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_108_平台列表汇总开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_109' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_109_获取渠道列表_运营商和学校_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_110' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_110_按渠道统计</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_111' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_111_按渠道统计不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_112' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_112_按渠道统计不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_113' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_113_按渠道统计不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_114' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_114_按渠道统计不传account</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_115' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_115_按渠道统计传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_116' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_116_按渠道统计开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_117' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_117_按渠道统计开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_118' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_118_按渠道统计account不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_119' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_119_按渠道统计account传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_120' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_120_按渠道统计概况</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_121' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_121_按渠道统计概况不传开始时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_122' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_122_按渠道统计概况不传结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_123' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_123_按渠道统计概况不传开始结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_124' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_124_按渠道统计概况不传account</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_125' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_125_按渠道统计概况传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_126' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_126_按渠道统计概况开始时间大于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_127' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_127_按渠道统计概况开始时间等于结束时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_128' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_128_按渠道统计概况account不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_129' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_129_按渠道统计概况account传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_130' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_130_学生绑定统计表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_131' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_131_学生绑定统计表groupName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_132' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_132_学生绑定统计表schoolName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_133' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_133_学生绑定统计表groupName和schoolName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_134' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_134_学生绑定统计表groupName不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_135' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_135_学生绑定统计表schoolName不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_136' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_136_学生绑定统计表传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_137' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_137_学生绑定统计表汇总</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_138' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_138_学生绑定统计表汇总groupName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_139' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_139_学生绑定统计表汇总schoolName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_140' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_140_学生绑定统计表汇总groupName和schoolName不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_141' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_141_学生绑定统计表汇总groupName不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_142' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_142_学生绑定统计表汇总schoolName不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_143' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_143_学生绑定统计表汇总传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_144' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_144_数据大屏_统计数据</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_145' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_145_数据大屏_动态数据</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_146' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_146_数据大屏_人数信息</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>test_07_seting_center.Testcase</td>
+    <td class="text-center">35</td>
+    <td class="text-center">35</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c7',35)" class="detail" id='c7'>详细</a></td>
+</tr>
+
+<tr id='pt7_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_获取授权二维码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_获取小程序信息</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_设置小程序欢迎页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_设置小程序欢迎页图片不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_非税局项目代码列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_非税局项目代码列表merchantId与登录的不一致</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_非税局项目代码列表不传merchantId</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_学校列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_分组列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_分页列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_获取科目已设置的分组ID</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_获取科目已设置的分组ID_id不存在_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_更新</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_更新id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_更新code不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_更新收款渠道id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_更新最低金额大于最高金额</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_更新分组ID不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_20_更新分组ID为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_21_更新不传收款渠道_金额限制_分组id</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_22_创建_无限额_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_23_创建_限额上限比下线少_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_24_创建_限额上限比下线多_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_25_创建不传code</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_26_创建code传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_27_创建不传渠道</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_28_创建渠道传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_29_创建分组列表为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_30_创建不传分组列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_31_创建限额只传上限</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_32_创建限额只传下限</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_33_创建限额不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_34_删除</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_35_删除项目id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>test_08_manager_authority.Testcase</td>
+    <td class="text-center">85</td>
+    <td class="text-center">82</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c8',85)" class="detail" id='c8'>详细</a></td>
+</tr>
+
+<tr id='pt8_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_01_正常登录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_02_获取管理员列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_03_获取管理员列表成员与部门不相符</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_04_获取管理员列表不传成员名称</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_05_获取管理员列表成员名称传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_06_获取管理员列表成员名称传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_07_获取管理员列表不传部门名称</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_08_获取管理员列表部门名称传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_09_获取管理员列表部门名称传空参</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_10_获取管理员列表不传条件</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_11_管理员导入记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_12_获取渠道列表_运营商和学校_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_13_部门列表不传pid</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_14_部门列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_15_部门列表pid不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_16_部门列表pid传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_17' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_17_部门详情</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_18' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_18_添加部门</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_19' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_19_添加部门上级id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_20' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_20_添加部门分组不在上级部门内</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_21' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_21_添加部门分组为空列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_22' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_22_添加部门部门名称为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_23' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_23_添加部门部门pid为null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_24' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_24_编辑部门</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_25' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_25_编辑部门id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_26' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_26_编辑部门pid不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_27' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_27_编辑部门id不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_28' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_28_编辑部门pid不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_29' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_29_编辑部门name为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_30' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_30_编辑部门name不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_31' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_31_编辑部门schoolGroupIds为_1</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_32' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_32_编辑部门schoolGroupIds为空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_33' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_33_编辑部门schoolGroupIds不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_34' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_34_删除部门</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_35' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_35_删除部门不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_36' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_36_职位列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_37' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_37_添加职位</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_38' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_38_添加职位部门id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_39' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_39_添加职位部门id不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft8_40' class='none'>
+    <td class='failCase'><div class='testcase'>test_case_40_添加职位职位名称传空</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft8_40' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft8_40'>失败</button>
+    <div id='div_ft8_40' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft8_40' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft8_40'>失败</button>
+    <div id='div_ft8_40' class="collapse in" align="left">
+    <pre>
+    
+ft8_40: Traceback (most recent call last):
+  File "d:\Group_Api_payment\lib\ddt.py", line 150, in wrapper
+    return func(self, *args, **kwargs)
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 96, in test_case
+    raise e
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 88, in test_case
+    self.assertIn(str(data_dict["expected"]), res.text)
+AssertionError: 'name invalid' not found in '{"errcode":"0","errmsg":"ok"}'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_41' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_41_添加职位职位名称传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft8_42' class='none'>
+    <td class='failCase'><div class='testcase'>test_case_42_添加职位职位名称不传</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft8_42' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft8_42'>失败</button>
+    <div id='div_ft8_42' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft8_42' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft8_42'>失败</button>
+    <div id='div_ft8_42' class="collapse in" align="left">
+    <pre>
+    
+ft8_42: Traceback (most recent call last):
+  File "d:\Group_Api_payment\lib\ddt.py", line 150, in wrapper
+    return func(self, *args, **kwargs)
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 96, in test_case
+    raise e
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 88, in test_case
+    self.assertIn(str(data_dict["expected"]), res.text)
+AssertionError: 'name missing_field' not found in '{"errcode":"0","errmsg":"ok"}'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_43' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_43_添加职位分组_1</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_44' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_44_添加职位分组id不在部门中</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_45' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_45_添加职位菜单不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_46' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_46_编辑职位</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_47' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_47_编辑职位id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_48' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_48_编辑职位部门id不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_49' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_49_编辑职位职位名称传空</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_50' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_50_编辑职位职位名称传null</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_51' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_51_编辑职位职位名称不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_52' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_52_编辑职位分组_1</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_53' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_53_编辑职位分组id不在部门中</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_54' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_54_编辑职位菜单不传</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_55' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_55_删除职位</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_56' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_56_删除职位id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_57' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_57_添加成员_是负责人_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_58' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_58_添加成员_不是负责人_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_59' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_59_添加成员_isAdmin为3_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_60' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_60_添加成员_成员名称为空_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_61' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_61_添加成员_成员名称不传_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_62' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_62_添加成员_成员名称null_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_63' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_63_添加成员_手机号已存在_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft8_64' class='none'>
+    <td class='failCase'><div class='testcase'>test_case_64_添加成员_手机号格式错误_</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft8_64' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft8_64'>失败</button>
+    <div id='div_ft8_64' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft8_64' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft8_64'>失败</button>
+    <div id='div_ft8_64' class="collapse in" align="left">
+    <pre>
+    
+ft8_64: Traceback (most recent call last):
+  File "d:\Group_Api_payment\lib\ddt.py", line 150, in wrapper
+    return func(self, *args, **kwargs)
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 96, in test_case
+    raise e
+  File "d:\Group_Api_payment\test_cases_py\test_08_manager_authority.py", line 88, in test_case
+    self.assertIn(str(data_dict["expected"]), res.text)
+AssertionError: '帐号格式错误' not found in '{"errcode":"201103011","errmsg":"账号已存在"}'
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt8_65' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_65_添加成员_密码与确认密码不一致_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_66' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_66_添加成员_密码为空_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_67' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_67_添加成员_密码不传_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_68' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_68_添加成员_密码为null_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_69' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_69_添加成员_确认密码为空_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_70' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_70_添加成员_确认密码为null_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_71' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_71_添加成员_确认密码不传_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_72' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_72_添加成员_数据分组不在职位的分组中_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_73' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_73_编辑成员</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_74' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_74_编辑成员id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_75' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_75_编辑成员_isAdmin为3_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_76' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_76_编辑成员_成员名称为空_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_77' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_77_编辑成员_成员名称不传_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_78' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_78_编辑成员_成员名称null_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_79' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_79_编辑成员_手机号已存在_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_80' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_80_编辑成员_手机号格式错误_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_81' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_81_编辑成员_数据分组不在职位的分组中_</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_82' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_82_删除成员</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_83' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_83_删除成员id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_84' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_84_重置密码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_85' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_case_85_重置密码id不存在</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>429</td>
+    <td>424</td>
+    <td>5</td>
+    <td>0</td>
+    <td>通过率：98.83%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>
